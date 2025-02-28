@@ -76,4 +76,6 @@ kubectl delete pod -n kube-system --all
 ## CI/CD
 Автоматическая сборка и деплой реализованы с помощью GitHub Actions.
 
+### Сылка на Docker Hub
 
+https://hub.docker.com/r/honorwizz/webserverhtml
