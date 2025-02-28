@@ -1,0 +1,26 @@
+name: CI/CD for Web Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Copy files to deployment directory
+        run: |
+          echo "Копируем файлы в /home/k8s-user/app/"
+          rm -rf /home/k8s-user/app || true
+          mkdir -p /home/k8s-user/app
+          cp -r * /home/k8s-user/app/
+
+      - name: Deploy Helm Chart
+        run: |
+          echo "Запускаем Helm-деплой..."
+          cd /home/k8s-user/app/helm
+          helm upgrade --install my-webserver . -n web-app
